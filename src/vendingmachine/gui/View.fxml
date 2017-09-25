@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vendingmachine.gui.ViewController">
+   <children>
+      <Region layoutX="365.0" layoutY="41.0" prefHeight="319.0" prefWidth="214.0" style="-fx-background-color: lightgray;" />
+      <GridPane layoutX="398.0" layoutY="93.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="7" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="8" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="9" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="4" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <TextField fx:id="textDisplay" layoutX="373.0" layoutY="49.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <HBox alignment="CENTER" layoutX="373.0" layoutY="300.0" prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelClicked" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: red;" text="Cancel">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="enterButton" mnemonicParsing="false" onAction="#enterClicked" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: green;" text="Enter">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="14.0" layoutY="336.0" prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="penny" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.01" />
+            <Button fx:id="nickel" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.05" />
+            <Button fx:id="dime" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.10" />
+            <Button fx:id="quarter" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.25" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
