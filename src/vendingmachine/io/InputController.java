@@ -29,12 +29,40 @@ public class InputController {
     }
 
     public void processInput( String input ) {
-        displayText( "Input processed: " + input );
+        boolean validCode = false;
 
+        if( input.length() == 4){
+            validCode = vendingMachine.operatorLogin( input );
+
+            if( validCode )
+                displayText( "Operator Logged In" );
+        }
+        else if( input.length() == 2){
+            validCode = vendingMachine.productCode( input );
+
+            if( validCode )
+                displayText( "Product ordered" );
+        }
+        else if( input.length() == 1){
+            validCode = vendingMachine.opCode( input );
+
+            if( validCode )
+                displayText( "Opcode processed" );
+        }
+
+        if( !validCode ){
+            displayText( "Invalid Input" + input );
+        }
+    }
+
+    public void finishSession(){
+        vendingMachine.finishSession();
     }
 
     public void cancelSession() {
         displayText( "Session Cancelled!" );
+
+        vendingMachine.cancelSession();
     }
 
     public KeyPad getKeyPad() {

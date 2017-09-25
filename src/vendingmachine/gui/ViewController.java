@@ -45,6 +45,12 @@ public class ViewController {
     }
 
     @FXML
+    public void doneClicked(ActionEvent event ){
+        keyPad.pressedButton( "DONE" );
+        currentInput = new StringBuilder(  );
+    }
+
+    @FXML
     public void cancelClicked( ActionEvent event ){
         keyPad.pressedButton( "CANCEL" );
         currentInput = new StringBuilder(  );

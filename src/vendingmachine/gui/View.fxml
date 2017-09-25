@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vendingmachine.gui.ViewController">
    <children>
       <Region layoutX="365.0" layoutY="41.0" prefHeight="319.0" prefWidth="214.0" style="-fx-background-color: lightgray;" />
@@ -66,5 +65,6 @@
             <Button fx:id="quarter" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="quarter" />
          </children>
       </HBox>
+      <Button layoutX="446.0" layoutY="349.0" mnemonicParsing="false" onAction="#doneClicked" text="Done" />
    </children>
 </AnchorPane>

@@ -24,6 +24,10 @@ public class KeyPad {
                 inputController.processInput( currentInput );
                 currentInput = "";
                 break;
+            case "DONE":
+                inputController.finishSession();
+                currentInput = "";
+                break;
             default:
                 currentInput += key;
         }

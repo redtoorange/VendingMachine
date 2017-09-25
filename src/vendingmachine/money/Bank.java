@@ -55,28 +55,49 @@ public class Bank {
         return new Currency( total );
     }
 
-//    public List<vendingmachine.money.Currency> dispenseChange( float amount ) throws vendingmachine.money.CurencyException{
-//        List<vendingmachine.money.Currency> change = new ArrayList<vendingmachine.money.Currency>(  );
-//
-//        amount = makeChange( amount, vendingmachine.money.Currency.Quarter, quarters, change );
-//        amount = makeChange( amount, vendingmachine.money.Currency.Dime, dimes, change );
-//        amount = makeChange( amount, vendingmachine.money.Currency.Nickel, nickels, change );
-//        makeChange( amount, vendingmachine.money.Currency.Penny, pennies, change );
-//
-//        if( amount > 0 )
-//            throw new vendingmachine.money.CurencyException( "Insufficient coins to make change." );
-//
-//        return  change;
-//    }
-//
-//    private float makeChange(float amount, vendingmachine.money.Currency coin, Stack<vendingmachine.money.Currency>coins, List<vendingmachine.money.Currency> change ){
-//        float remaining = amount;
-//
-//        while( remaining / coin.value > 0 && !coins.isEmpty()){
-//            remaining /= coin.value;
-//            change.add( coins.pop() );
-//        }
-//
-//        return remaining;
-//    }
+    public void refund( Currency amount ){
+        int cents = amount.totalCentValue();
+
+        while( cents > 0 && cents % 25 == 0 && !quarters.empty()){
+            cents -= 25;
+            quarters.pop();
+            System.out.println( "Dispense Quarter" );
+        }
+        while( cents > 0 && cents % 10 == 0 && !dimes.empty()){
+            cents -= 10;
+            dimes.pop();
+            System.out.println( "Dispense Dime" );
+        }
+        while( cents > 0 && cents % 5 == 0 && !nickels.empty()){
+            cents -= 5;
+            nickels.pop();
+            System.out.println( "Dispense Nickel" );
+        }
+        while( cents > 0 && cents % 1 == 0 && !pennies.empty()){
+            cents -= 1;
+            pennies.pop();
+            System.out.println( "Dispense Penny" );
+        }
+
+        if( cents > 0){
+            System.out.println( "Insufficient coins to dispense complete change." );
+        }
+
+        System.out.println( toString() );
+    }
+
+    public String toString(){
+        StringBuilder b = new StringBuilder(  );
+        b.append( "Quarters: " );
+        b.append( quarters.size() );
+        b.append( "\nDimes: " );
+        b.append( dimes.size() );
+        b.append( "\nNickels: " );
+        b.append( nickels.size() );
+        b.append( "\nPennies: " );
+        b.append( pennies.size() );
+        b.append( "\n" );
+
+        return b.toString();
+    }
 }

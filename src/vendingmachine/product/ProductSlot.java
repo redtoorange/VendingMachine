@@ -49,6 +49,14 @@ public class ProductSlot {
         this.productStock = productStock;
     }
 
+    public void incrementStock(){
+        productStock++;
+    }
+
+    public void decrementStock(){
+        productStock--;
+    }
+
     public void addProductStock( int amount ) throws ProductLevelException {
         if ( currentProduct == null )
             throw new ProductLevelException( "Not product set in product slot" );
@@ -56,13 +64,8 @@ public class ProductSlot {
             productStock += amount;
     }
 
-    public Product dispenseProduct() throws ProductLevelException {
-        if ( currentProduct == null )
-            throw new ProductLevelException( "Not product set in product slot" );
-        else if ( productStock == 0 )
-            throw new ProductLevelException( "vendingmachine.product.Product slot is empty, no product to dispense." );
-        else
-            productStock--;
+    public Product dispenseProduct() {
+        System.out.println( "Dispensed " + currentProduct.getName() );
 
         return currentProduct.clone();
     }

@@ -6,7 +6,7 @@ package vendingmachine.money;
  * @author Andrew McGuiness
  * @version 9/12/2017
  */
-public class Currency implements Comparable {
+public class Currency {
     private int dollars = 0;
     private int cents = 0;
 
@@ -27,6 +27,10 @@ public class Currency implements Comparable {
         return cents;
     }
 
+    public int totalCentValue(){
+        return (dollars * 100) + cents;
+    }
+
     public boolean equals( Currency other ) {
         boolean equal = false;
 
@@ -37,8 +41,11 @@ public class Currency implements Comparable {
     }
 
     public void add( Currency other ){
-        addDollars( other.getDollars() );
-        addCents( other.getCents() );
+        addCents( other.totalCentValue() );
+    }
+
+    public void sub(Currency other ){
+        subCents( other.totalCentValue() );
     }
 
     public double getBalance() {
@@ -58,40 +65,40 @@ public class Currency implements Comparable {
         dollars += dollarsToAdd;
     }
 
-    public void subCents( int centsToSub ) throws CurencyException {
-        if ( cents > centsToSub ) {
+    public void subCents( int centsToSub ) {
+        if ( cents >= centsToSub ) {
             cents -= centsToSub;
         } else if ( dollars > 0 ) {
             dollars--;
             cents += 100;
             subCents( centsToSub );
-        } else {
-            throw new CurencyException( "Subbing too many cents, balance goes negative." );
         }
     }
 
+
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder( "$" + dollars + "." );
+        int d = Math.abs( dollars );
+        int c = Math.abs( cents );
 
-        if ( cents == 0 )
+        StringBuilder sb = new StringBuilder( (isPositive() ? "" : "-" ) + "$" + d + "." );
+
+        if ( c == 0 )
             sb.append( "00" );
-        else if ( cents < 10 )
-            sb.append( "0" + cents );
+        else if ( c < 10 )
+            sb.append( "0" + c );
         else
-            sb.append( cents );
+            sb.append( c );
 
         return sb.toString();
     }
 
-    @Override
-    public int compareTo( Object other ) {
-        if ( other instanceof Currency ) {
-            Currency otherCurr = ( Currency ) other;
+    public boolean lessThanOrEqual( Currency other ){
+        return totalCentValue() <= other.totalCentValue();
+    }
 
-
-        }
-
-        return 0;
+    public boolean isPositive(){
+        return cents >= 0 && dollars >= 0;
     }
 }

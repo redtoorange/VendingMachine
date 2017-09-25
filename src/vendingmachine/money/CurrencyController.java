@@ -24,7 +24,13 @@ public class CurrencyController {
         return currentBalance;
     }
 
-    public Currency refundCurrentBalance(){
+    public void refundCurrentBalance(){
+        bank.refund( currentBalance );
+        currentBalance = new Currency( 0 );
+    }
 
+    public void completeTransaction( Currency cost ){
+        currentBalance.sub( cost );
+        refundCurrentBalance();
     }
 }

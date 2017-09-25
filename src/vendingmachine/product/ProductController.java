@@ -1,6 +1,7 @@
 package vendingmachine.product;
 
 import vendingmachine.io.InputException;
+import vendingmachine.money.Currency;
 
 /**
  * vendingmachine.product.ProductController.java - Description
@@ -18,10 +19,15 @@ public class ProductController {
                 productSlots[x][y] = new ProductSlot();
             }
         }
+
+        productSlots[0][0].setProductStock( 10 );
+        productSlots[0][0].setCost( new Currency( 50 ) );
+        productSlots[0][0].setCurrentProduct( new Product( "Junk" ) );
     }
 
     public ProductSlot getSlot( String code ) throws InputException {
-        ProductSlot slot = null;
+        ProductSlot slot;
+
         if ( code.length() != 2 )
             throw new InputException( "Input incorrect length" );
         else {
@@ -33,6 +39,7 @@ public class ProductController {
             } else
                 slot = productSlots[col][row];
         }
+
         return slot;
     }
 }
