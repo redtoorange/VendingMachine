@@ -18,6 +18,7 @@ public class KeyPad {
         switch ( key ) {
             case "CANCEL":
                 inputController.cancelSession();
+                currentInput = "";
                 break;
             case "ENTER":
                 inputController.processInput( currentInput );

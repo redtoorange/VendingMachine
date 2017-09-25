@@ -60,10 +60,10 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="336.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button fx:id="penny" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.01" />
-            <Button fx:id="nickel" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.05" />
-            <Button fx:id="dime" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.10" />
-            <Button fx:id="quarter" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="\$0.25" />
+            <Button fx:id="penny" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="penny" />
+            <Button fx:id="nickel" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="nickel" />
+            <Button fx:id="dime" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="dime" />
+            <Button fx:id="quarter" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="quarter" />
          </children>
       </HBox>
    </children>

@@ -11,26 +11,30 @@ import vendingmachine.money.Coin;
  */
 public class InputController {
     private VendingMachine vendingMachine;
+
     private KeyPad keyPad;
     private CoinSlot coinSlot;
+    private OutputDisplay outputDisplay;
 
     public InputController( VendingMachine vendingMachine ) {
         this.vendingMachine = vendingMachine;
+
         keyPad = new KeyPad( this );
         coinSlot = new CoinSlot( this );
+        outputDisplay = new OutputDisplay();
     }
 
     public void insertCoin( Coin coin ) {
-        vendingMachine.getCurrencyController().addCoinToBalance( coin );
+        vendingMachine.coinInserted( coin );
     }
 
     public void processInput( String input ) {
-        System.out.println( "Input processed: " + input );
+        displayText( "Input processed: " + input );
 
     }
 
     public void cancelSession() {
-        System.out.println( "Session Cancelled!" );
+        displayText( "Session Cancelled!" );
     }
 
     public KeyPad getKeyPad() {
@@ -39,5 +43,13 @@ public class InputController {
 
     public CoinSlot getCoinSlot() {
         return coinSlot;
+    }
+
+    public void displayText( String text ){
+        outputDisplay.displayText( text );
+    }
+
+    public OutputDisplay getOutputDisplay() {
+        return outputDisplay;
     }
 }

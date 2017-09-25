@@ -1,7 +1,10 @@
 package vendingmachine;
 
 import vendingmachine.io.InputController;
+import vendingmachine.money.Coin;
+import vendingmachine.money.Currency;
 import vendingmachine.money.CurrencyController;
+import vendingmachine.product.OrderList;
 import vendingmachine.product.ProductController;
 
 /**
@@ -11,6 +14,7 @@ import vendingmachine.product.ProductController;
  * @version 15/Sep/2017
  */
 public class VendingMachine {
+    private OrderList orderList;
     private ProductController productController;
     private InputController inputController;
     private CurrencyController currencyController;
@@ -20,6 +24,7 @@ public class VendingMachine {
 
         inputController = new InputController( this );
         currencyController = new CurrencyController();
+        orderList = new OrderList();
     }
 
     public ProductController getProductController() {
@@ -34,5 +39,13 @@ public class VendingMachine {
         return currencyController;
     }
 
+    public void coinInserted( Coin c ){
+        currencyController.addCoinToBalance( c );
+        inputController.displayText( currencyController.getCurrentBalance().toString() );
+    }
+
+    public void cancelSession(){
+        Currency refundAmount = currencyController.getCurrentBalance();
+    }
 
 }

@@ -28,7 +28,7 @@ public class MainGUI extends Application {
         InputController inputController = vendingMachine.getInputController();
 
         ViewController viewController = loader.getController();
-        viewController.init( inputController.getKeyPad(), inputController.getCoinSlot() );
+        viewController.init( inputController.getKeyPad(), inputController.getCoinSlot(), inputController.getOutputDisplay() );
 
 
         Scene scene = new Scene( root );

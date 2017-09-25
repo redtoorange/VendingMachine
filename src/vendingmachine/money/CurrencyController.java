@@ -23,4 +23,8 @@ public class CurrencyController {
     public Currency getCurrentBalance() {
         return currentBalance;
     }
+
+    public Currency refundCurrentBalance(){
+
+    }
 }

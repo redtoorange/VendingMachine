@@ -36,6 +36,11 @@ public class Currency implements Comparable {
         return equal;
     }
 
+    public void add( Currency other ){
+        addDollars( other.getDollars() );
+        addCents( other.getCents() );
+    }
+
     public double getBalance() {
         return dollars + ( cents / 100.0 );
     }
@@ -47,6 +52,10 @@ public class Currency implements Comparable {
             cents -= 100;
             dollars++;
         }
+    }
+
+    public void addDollars( int dollarsToAdd){
+        dollars += dollarsToAdd;
     }
 
     public void subCents( int centsToSub ) throws CurencyException {
