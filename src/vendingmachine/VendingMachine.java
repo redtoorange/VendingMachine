@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.gui.Messages;
 import vendingmachine.io.InputController;
 import vendingmachine.money.Coin;
 import vendingmachine.money.Currency;
@@ -17,6 +18,9 @@ import static vendingmachine.VendingMachine.SessionState.*;
  * @version 15/Sep/2017
  */
 public class VendingMachine {
+    private static final String BANK_OP = "0";
+    private static final String STOCK_OP = "1";
+
     private static final String PASSCODE = "1234";
 
     enum SessionState{
@@ -49,97 +53,195 @@ public class VendingMachine {
         return currencyController;
     }
 
-    public void coinInserted( Coin c ){
-        if( currentState == IDLE || currentState == CUSTOMER){
-            if( currentState == IDLE )
-                currentState = CUSTOMER;
+    public void coinInsertMessage( Coin c ){
+        switch( currentState ){
+            case IDLE: case CUSTOMER:
+                customerSessionCoin(c);
+                break;
 
-            currencyController.addCoinToBalance( c );
-            inputController.displayText( currencyController.getCurrentBalance().toString() );
+            case BANKING:
+                bankingAddCoin(c);
+                break;
+
+            case OPERATOR: case RESTOCKING:
+                rejectCoin( c );
+                break;
         }
     }
 
-    public void finishSession(){
-        if( currentState == CUSTOMER ){
+    private void customerSessionCoin(Coin c){
+        if( currentState == IDLE )
+            setCurrentState( CUSTOMER );
 
-            Currency bal = currencyController.getCurrentBalance();
-            Currency bill = orderList.getTotalCost();
+        currencyController.addCoinToBalance( c );
+        inputController.displayText( currencyController.getCurrentBalance().toString() );
+    }
 
-            if( bill.lessThanOrEqual( bal ) ){
-                currencyController.completeTransaction( orderList.completeOrder() );
-                inputController.displayText( "Product order finished." );
-                currentState = IDLE;
-            }
-            else{
-                inputController.displayText( "Insufficient Change:" +
-                        "\n\tHave: " + bal +
-                        "\n\tNeed: " + bill);
-            }
+    private void bankingAddCoin( Coin c){
+        currencyController.addCoinToBank( c );
+        setCurrentState( BANKING );
+    }
+
+
+    private void rejectCoin( Coin c){
+        currencyController.addCoinToBalance( c );
+        currencyController.refundCurrentBalance();
+    }
+
+    public void finishMessage(){
+        switch ( currentState ){
+            case CUSTOMER:
+                customerFinishSession();
+                break;
+
+            case OPERATOR:
+                operatorFinishSession();
+                break;
+
+            case RESTOCKING: case BANKING:
+                setCurrentState( OPERATOR );
+                break;
         }
     }
 
-    public void cancelSession(){
-        if( currentState == CUSTOMER ){
-            currencyController.refundCurrentBalance();
+    private void customerFinishSession(){
+        Currency bal = currencyController.getCurrentBalance();
+        Currency bill = orderList.getTotalCost();
 
-            if( orderList.getItemCount() > 0){
-                orderList.cancelOrder();
-            }
+        if( bill.lessThanOrEqual( bal ) ){
+            currencyController.completeTransaction( orderList.completeOrder() );
+            inputController.displayText( "Product order finished." );
+            setCurrentState( CUSTOMER );
         }
-
-        currentState = IDLE;
+        else{
+            inputController.displayText( "Insufficient Change:" +
+                    "\n\tHave: " + bal +
+                    "\n\tNeed: " + bill);
+        }
     }
 
-    public boolean productCode( String code ){
-        boolean success = true;
+    private void operatorFinishSession(){
+        setCurrentState( IDLE );
+    }
 
+
+
+    public void cancelMessage(){
         switch( currentState ){
             case IDLE:
-            case CUSTOMER:
-                try {
-                    ProductSlot slot = productController.getSlot( code );
-                    addProductToOrder( slot );
-                }
-                catch( Exception e ){
-                    success = false;
-                }
-
-                if( success ){
-                    inputController.displayText( "Product ordered" );
-                    currentState = CUSTOMER;
-                }
+                setCurrentState( IDLE );
                 break;
+
+            case CUSTOMER:
+                cancelCustomerSession();
+                break;
+
             case OPERATOR:
-                try {
-                    ProductSlot slot = productController.getSlot( code );
-                    inputController.displayText( "Stock Level: " + slot.getProductStock() );
-                }
-                catch( Exception e ){
-                    success = false;
-                }
-        }
+                cancelOperatorSession();
+                break;
 
-        return success;
+            case RESTOCKING: case BANKING:
+                setCurrentState( OPERATOR );
+                break;
+        }
     }
 
-    public boolean opCode( String code ){
-        boolean success = false;
+    private void cancelCustomerSession(){
+        currencyController.refundCurrentBalance();
 
-        if( currentState == OPERATOR ){
-            //process opcode
-            success = true;
-        }
+        if( orderList.getItemCount() > 0)
+            orderList.cancelOrder();
 
-        return success;
+        setCurrentState( IDLE );
     }
 
-    public boolean operatorLogin( String code ){
+    private void cancelOperatorSession(){
+        setCurrentState( IDLE );
+    }
+
+    public void inputMessage( String message ){
+        switch( currentState ){
+            case IDLE:
+                if( message.length() == 4)
+                    operatorLogin( message );
+                else
+                    attemptToAddProduct( message );
+                break;
+
+            case CUSTOMER:
+                attemptToAddProduct( message );
+                break;
+
+            case OPERATOR:
+                opCode( message );
+                break;
+
+            case BANKING:
+                bankCode( message );
+                break;
+
+            case RESTOCKING:
+                stockCode(message);
+                break;
+        }
+    }
+
+    private void attemptToAddProduct( String message ) {
+        boolean success = true;
+        try {
+            ProductSlot slot = productController.getSlot( message );
+            addProductToOrder( slot );
+        }
+        catch( Exception e ){
+            success = false;
+        }
+
+        if( success ){
+            if( currentState != CUSTOMER)
+                setCurrentState( CUSTOMER );
+
+            inputController.displayText( "Product added to order." );
+        }
+        else{
+            inputController.displayText( "Invalid Input" );
+        }
+    }
+
+    private void opCode( String code ){
+        switch ( code ){
+            case BANK_OP:
+                setCurrentState( BANKING );
+                break;
+            case STOCK_OP:
+                setCurrentState( RESTOCKING );
+                break;
+            default:
+                inputController.displayText( Messages.OPERATOR_MSG );
+        }
+    }
+
+    private void bankCode( String code ){
+        switch ( code ){
+            case "0":
+                currencyController.getBank().clearBank();
+                inputController.displayText( Messages.BANKING_MSG );
+        }
+        inputController.displayText( Messages.BANKING_MSG );
+    }
+
+    private void stockCode( String code ){
+
+    }
+
+    private boolean operatorLogin( String code ){
         boolean success = false;
 
         if( code.equals( PASSCODE )){
-            currentState = OPERATOR;
+            setCurrentState( OPERATOR );
             success = true;
         }
+        else
+            inputController.clearDisplay();
 
         return success;
     }
@@ -152,4 +254,44 @@ public class VendingMachine {
             orderList.addProduct( slot );
         }
     }
+
+    private void setCurrentState( SessionState state ){
+        currentState = state;
+
+        handleOperatorStates();
+        handleCustomerStates();
+    }
+
+    private void handleCustomerStates(){
+        switch ( currentState ) {
+            case IDLE:
+                inputController.clearDisplay();
+                break;
+
+            case CUSTOMER:
+                inputController.clearDisplay();
+                break;
+        }
+    }
+
+    private void handleOperatorStates() {
+        switch ( currentState ){
+            case OPERATOR:
+                inputController.displayText( Messages.OPERATOR_MSG );
+                break;
+
+            case BANKING:
+                inputController.displayText(
+                        currencyController.getBank() +
+                        Messages.BANKING_MSG
+                );
+                break;
+
+            case RESTOCKING:
+                inputController.displayText(Messages.RESTOCKING_MSG);
+                break;
+        }
+    }
+
+
 }

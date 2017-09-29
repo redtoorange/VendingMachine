@@ -3,9 +3,9 @@ package vendingmachine.io;
 import javafx.scene.control.TextArea;
 
 /**
- * ${FILE_NAME}.java - Description
+ * OutputDisplay.java - Description
  *
- * @author
+ * @author  Andrew McGuiness
  * @version 25/Sep/2017
  */
 public class OutputDisplay {

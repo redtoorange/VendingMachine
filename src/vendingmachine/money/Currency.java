@@ -1,7 +1,9 @@
 package vendingmachine.money;
 
 /**
- * vendingmachine.money.Currency.java - Description
+ * Currency.java - The {@link Currency} class is designed to represent a sum of money.  This is abstracted away from the
+ * {@link Coin}s that might make up the value, it is a purely numeric value.  This is used by the
+ * {@link vendingmachine.VendingMachine} to avoid needing to track all the Coins the user inserted and when.
  *
  * @author Andrew McGuiness
  * @version 9/12/2017
@@ -19,18 +21,21 @@ public class Currency {
         addCents( cents );
     }
 
-    public int getDollars() {
-        return dollars;
+    /**
+     * Get to total value of this {@link Currency} in the form of an int representation (cents).
+     *
+     * @return Total Cent value of this {@link Currency} (including dollars).
+     */
+    public int totalCentValue() {
+        return ( dollars * 100 ) + cents;
     }
 
-    public int getCents() {
-        return cents;
-    }
-
-    public int totalCentValue(){
-        return (dollars * 100) + cents;
-    }
-
+    /**
+     * Compare the value of this {@link Currency} to another instance to see if they are equal.
+     *
+     * @param other {@link Currency} to use to check for equality
+     * @return True of the total value of both {@link Currency} instances are equal.
+     */
     public boolean equals( Currency other ) {
         boolean equal = false;
 
@@ -40,52 +45,73 @@ public class Currency {
         return equal;
     }
 
-    public void add( Currency other ){
-
+    /**
+     * Add another {@link Currency} to this {@link Currency}
+     *
+     * @param other {@link Currency} to add.
+     */
+    public void add( Currency other ) {
         addCents( other.totalCentValue() );
     }
 
-    public void sub(Currency other ){
+    /**
+     * Subtract another {@link Currency} from this {@link Currency}
+     *
+     * @param other {@link Currency} to subtract.
+     */
+    public void sub( Currency other ) {
         subCents( other.totalCentValue() );
     }
 
-    public double getBalance() {
-        return dollars + ( cents / 100.0 );
-    }
-
+    /**
+     * Add cents to the value of this {@link Currency}
+     *
+     * @param centsToAdd number of cents to add.
+     */
     public void addCents( int centsToAdd ) {
         cents += centsToAdd;
 
-        if ( cents >= 100 ) {
+        while ( cents >= 100 ) {
             cents -= 100;
             dollars++;
         }
     }
 
-    public void addDollars( int dollarsToAdd){
-        dollars += dollarsToAdd;
-    }
-
+    /**
+     * Subtract cents from the value of this {@link Currency}.  This can cause it to go negative.
+     *
+     * @param centsToSub number of cents to subtract.
+     */
     public void subCents( int centsToSub ) {
-        if ( cents >= centsToSub ) {
-            cents -= centsToSub;
-        } else if ( dollars > 0 ) {
-            dollars--;
+        cents -= centsToSub;
+
+        while ( cents < 0 && dollars > 0 ) {
             cents += 100;
-            subCents( centsToSub );
+            dollars--;
         }
     }
 
+    /**
+     * Compare the value of this {@link Currency} to another {@link Currency} instance, if this one is <= the other, return true.
+     *
+     * @param other {@link Currency} instance to compare to.
+     * @return True of this currency is <= other
+     */
+    public boolean lessThanOrEqual( Currency other ) {
+        return totalCentValue() <= other.totalCentValue();
+    }
 
-
-
-
+    /**
+     * Convert the value of this {@link Currency} into a formatted String.
+     *
+     * @return {@link Currency} as a String
+     */
     @Override
     public String toString() {
         int d = Math.abs( dollars );
         int c = Math.abs( cents );
 
-        StringBuilder sb = new StringBuilder( (isPositive() ? "" : "-" ) + "$" + d + "." );
+        StringBuilder sb = new StringBuilder( ( isPositive() ? "" : "-" ) + "$" + d + "." );
 
         if ( c == 0 )
             sb.append( "00" );
@@ -97,11 +123,8 @@ public class Currency {
         return sb.toString();
     }
 
-    public boolean lessThanOrEqual( Currency other ){
-        return totalCentValue() <= other.totalCentValue();
-    }
 
-    public boolean isPositive(){
+    private boolean isPositive() {
         return cents >= 0 && dollars >= 0;
     }
 }

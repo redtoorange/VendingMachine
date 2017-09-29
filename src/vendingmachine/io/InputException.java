@@ -1,7 +1,7 @@
 package vendingmachine.io;
 
 /**
- * vendingmachine.io.InputException.java - Description
+ * InputException.java - Description
  *
  * @author Andrew McGuiness
  * @version 9/12/2017

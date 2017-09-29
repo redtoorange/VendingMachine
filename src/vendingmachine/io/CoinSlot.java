@@ -3,9 +3,9 @@ package vendingmachine.io;
 import vendingmachine.money.Coin;
 
 /**
- * ${FILE_NAME}.java - Description
+ * CoinSlot.java - Description
  *
- * @author
+ * @author  Andrew McGuiness
  * @version 15/Sep/2017
  */
 public class CoinSlot {

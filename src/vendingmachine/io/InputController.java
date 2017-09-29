@@ -4,9 +4,9 @@ import vendingmachine.VendingMachine;
 import vendingmachine.money.Coin;
 
 /**
- * ${FILE_NAME}.java - Description
+ * InputController.java - Description
  *
- * @author
+ * @author  Andrew McGuiness
  * @version 15/Sep/2017
  */
 public class InputController {
@@ -25,41 +25,20 @@ public class InputController {
     }
 
     public void insertCoin( Coin coin ) {
-        vendingMachine.coinInserted( coin );
+        vendingMachine.coinInsertMessage( coin );
     }
 
     public void processInput( String input ) {
-        boolean validCode = false;
-
-        if( input.length() == 4){
-            validCode = vendingMachine.operatorLogin( input );
-
-            if( validCode )
-                displayText( "Operator Logged In" );
-        }
-        else if( input.length() == 2){
-            validCode = vendingMachine.productCode( input );
-        }
-        else if( input.length() == 1){
-            validCode = vendingMachine.opCode( input );
-
-            if( validCode )
-                displayText( "Opcode processed" );
-        }
-
-        if( !validCode ){
-            displayText( "Invalid Input: " + input );
-        }
+        if( input.length() > 0)
+            vendingMachine.inputMessage( input );
     }
 
     public void finishSession(){
-        vendingMachine.finishSession();
+        vendingMachine.finishMessage();
     }
 
     public void cancelSession() {
-        displayText( "Session Cancelled!" );
-
-        vendingMachine.cancelSession();
+        vendingMachine.cancelMessage();
     }
 
     public KeyPad getKeyPad() {
@@ -72,6 +51,10 @@ public class InputController {
 
     public void displayText( String text ){
         outputDisplay.displayText( text );
+    }
+
+    public void clearDisplay(){
+        outputDisplay.displayText( "" );
     }
 
     public OutputDisplay getOutputDisplay() {

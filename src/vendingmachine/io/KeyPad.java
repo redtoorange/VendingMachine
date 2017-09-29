@@ -1,9 +1,9 @@
 package vendingmachine.io;
 
 /**
- * ${FILE_NAME}.java - Description
+ * KeyPad.java - Description
  *
- * @author
+ * @author  Andrew McGuiness
  * @version 15/Sep/2017
  */
 public class KeyPad {
