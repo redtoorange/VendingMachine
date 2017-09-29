@@ -17,7 +17,7 @@ public class Product {
         return name;
     }
 
-    protected Product clone() {
+    public Product clone() {
         return new Product( name );
 
     }

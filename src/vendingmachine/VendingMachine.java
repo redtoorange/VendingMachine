@@ -71,7 +71,9 @@ public class VendingMachine {
                 currentState = IDLE;
             }
             else{
-                inputController.displayText( "Insufficient Change" );
+                inputController.displayText( "Insufficient Change:" +
+                        "\n\tHave: " + bal +
+                        "\n\tNeed: " + bill);
             }
         }
     }

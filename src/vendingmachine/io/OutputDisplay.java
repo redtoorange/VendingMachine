@@ -1,6 +1,6 @@
 package vendingmachine.io;
 
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 /**
  * ${FILE_NAME}.java - Description
@@ -9,16 +9,16 @@ import javafx.scene.control.TextField;
  * @version 25/Sep/2017
  */
 public class OutputDisplay {
-    private TextField textField = null;
+    private TextArea textDisplay = null;
 
-    public void setTextField( TextField field ){
-        this.textField = field;
+    public void setTextDisplay( TextArea field ){
+        this.textDisplay = field;
     }
 
     public void displayText( String text ){
-        if( textField == null )
+        if( textDisplay == null )
             System.out.println( text );
         else
-            textField.setText( text );
+            textDisplay.setText( text );
     }
 }

@@ -48,7 +48,7 @@ public class InputController {
         }
 
         if( !validCode ){
-            displayText( "Invalid Input" + input );
+            displayText( "Invalid Input: " + input );
         }
     }
 

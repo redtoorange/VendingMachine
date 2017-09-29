@@ -3,7 +3,7 @@ package vendingmachine.gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import vendingmachine.io.CoinSlot;
 import vendingmachine.io.KeyPad;
 import vendingmachine.io.OutputDisplay;
@@ -17,7 +17,7 @@ import vendingmachine.money.Coin;
  */
 public class ViewController {
     @FXML
-    private TextField textDisplay;
+    private TextArea textDisplay;
 
     @FXML
     private Button pennyButton, nickelButton, dimeButton, quarterButton;
@@ -30,7 +30,7 @@ public class ViewController {
     public void init( KeyPad keyPad, CoinSlot coinSlot, OutputDisplay display){
         this.keyPad = keyPad;
         this.coinSlot = coinSlot;
-        display.setTextField( textDisplay );
+        display.setTextDisplay( textDisplay );
     }
 
     @FXML
