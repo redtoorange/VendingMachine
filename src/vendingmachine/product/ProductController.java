@@ -20,9 +20,45 @@ public class ProductController {
             }
         }
 
+        addTestProducts();
+    }
+
+    private void addTestProducts() {
         productSlots[0][0].setProductStock( 10 );
-        productSlots[0][0].setCost( new Currency( 50 ) );
-        productSlots[0][0].setCurrentProduct( new Product( "Junk" ) );
+        productSlots[0][0].setCost( new Currency( 75 ) );
+        productSlots[0][0].setCurrentProduct( new Product( "Snickers" ) );
+
+        productSlots[0][1].setProductStock( 10 );
+        productSlots[0][1].setCost( new Currency( 75 ) );
+        productSlots[0][1].setCurrentProduct( new Product( "Milky Way" ) );
+
+        productSlots[0][2].setProductStock( 10 );
+        productSlots[0][2].setCost( new Currency( 75 ) );
+        productSlots[0][2].setCurrentProduct( new Product( "Hersheys" ) );
+
+        productSlots[1][0].setProductStock( 10 );
+        productSlots[1][0].setCost( new Currency( 75 ) );
+        productSlots[1][0].setCurrentProduct( new Product( "Doritos" ) );
+
+        productSlots[1][1].setProductStock( 10 );
+        productSlots[1][1].setCost( new Currency( 75 ) );
+        productSlots[1][1].setCurrentProduct( new Product( "Cool Ranch Doritos") );
+
+        productSlots[1][2].setProductStock( 10 );
+        productSlots[1][2].setCost( new Currency( 75 ) );
+        productSlots[1][2].setCurrentProduct( new Product( "Fritos" ) );
+
+        productSlots[2][0].setProductStock( 10 );
+        productSlots[2][0].setCost( new Currency( 125 ) );
+        productSlots[2][0].setCurrentProduct( new Product( "Pringles" ) );
+
+        productSlots[2][1].setProductStock( 10 );
+        productSlots[2][1].setCost( new Currency( 50 ) );
+        productSlots[2][1].setCurrentProduct( new Product( "Peanut Butter Crackers" ) );
+
+        productSlots[2][2].setProductStock( 10 );
+        productSlots[2][2].setCost( new Currency( 50 ) );
+        productSlots[2][2].setCurrentProduct( new Product( "Cheese Crackers" ) );
     }
 
     public ProductSlot getSlot( String code ) throws InputException {

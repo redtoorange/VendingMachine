@@ -19,6 +19,9 @@ public class ViewController {
     @FXML
     private TextField textDisplay;
 
+    @FXML
+    private Button pennyButton, nickelButton, dimeButton, quarterButton;
+
     private StringBuilder currentInput = new StringBuilder(  );
     private KeyPad keyPad;
     private CoinSlot coinSlot;
@@ -59,19 +62,17 @@ public class ViewController {
     @FXML
     public void coinInserted( ActionEvent event){
         Button source = (Button) event.getSource();
-        switch ( source.getText() ){
-            case "penny":
-                coinSlot.insertCoint( Coin.Penny );
-                break;
-            case "nickel":
-                coinSlot.insertCoint( Coin.Nickel  );
-                break;
-            case "dime":
-                coinSlot.insertCoint( Coin.Dime  );
-                break;
-            case "quarter":
-                coinSlot.insertCoint( Coin.Quarter  );
-                break;
+        if( source == pennyButton ){
+            coinSlot.insertCoint( Coin.Penny );
+        }
+        else if( source == nickelButton ){
+            coinSlot.insertCoint( Coin.Nickel  );
+        }
+        else if( source == dimeButton ){
+            coinSlot.insertCoint( Coin.Dime  );
+        }
+        else if( source == quarterButton ){
+            coinSlot.insertCoint( Coin.Quarter  );
         }
     }
 }

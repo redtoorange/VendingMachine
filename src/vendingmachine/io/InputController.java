@@ -39,9 +39,6 @@ public class InputController {
         }
         else if( input.length() == 2){
             validCode = vendingMachine.productCode( input );
-
-            if( validCode )
-                displayText( "Product ordered" );
         }
         else if( input.length() == 1){
             validCode = vendingMachine.opCode( input );

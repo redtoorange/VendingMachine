@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vendingmachine.gui.ViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vendingmachine.gui.ViewController">
    <children>
-      <Region layoutX="365.0" layoutY="41.0" prefHeight="319.0" prefWidth="214.0" style="-fx-background-color: lightgray;" />
+      <Region layoutX="365.0" layoutY="4.0" prefHeight="405.0" prefWidth="214.0" style="-fx-background-color: lightgray;" />
       <GridPane layoutX="398.0" layoutY="93.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
@@ -38,7 +43,7 @@
             <Button mnemonicParsing="false" onAction="#numeralClicked" prefHeight="50.0" prefWidth="50.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <TextField fx:id="textDisplay" layoutX="373.0" layoutY="49.0">
+      <TextField fx:id="textDisplay" editable="false" layoutX="373.0" layoutY="9.0" prefHeight="77.0" prefWidth="200.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -59,12 +64,180 @@
       </HBox>
       <HBox layoutX="14.0" layoutY="336.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button fx:id="penny" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="penny" />
-            <Button fx:id="nickel" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="nickel" />
-            <Button fx:id="dime" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="dime" />
-            <Button fx:id="quarter" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0" text="quarter" />
+            <Button fx:id="pennyButton" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/penny.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="nickelButton" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/nickel.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="dimeButton" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/dime.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="quarterButton" mnemonicParsing="false" onAction="#coinInserted" prefHeight="50.0" prefWidth="50.0">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/quarter.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </HBox>
-      <Button layoutX="446.0" layoutY="349.0" mnemonicParsing="false" onAction="#doneClicked" text="Done" />
+      <Button layoutX="397.0" layoutY="356.0" mnemonicParsing="false" onAction="#doneClicked" prefHeight="50.0" prefWidth="150.0" text="Complete">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <GridPane gridLinesVisible="true" hgap="5.0" layoutX="9.0" layoutY="12.0" prefHeight="319.0" prefWidth="313.0" vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/snickers.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="00" />
+                  <Label fx:id="price00" minHeight="15.0" prefHeight="15.0" text="\$0.75" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@assets/milky.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="01" />
+                  <Label fx:id="price001" minHeight="15.0" prefHeight="15.0" text="\$0.75" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/hersheys.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="02" />
+                  <Label fx:id="price002" minHeight="15.0" prefHeight="15.0" text="\$0.75" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/doritos.png" />
+                     </image>
+                  </ImageView>
+                  <Label minHeight="15.0" prefHeight="15.0" text="10" />
+                  <Label fx:id="price003" minHeight="15.0" prefHeight="15.0" text="\$0.75" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/cr_doritos.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="11" />
+                  <Label fx:id="price004" minHeight="15.0" prefHeight="15.0" text="\$0.75" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/fritos-original-corn-chips-350x400.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="12" />
+                  <Label fx:id="price005" minHeight="15.0" prefHeight="15.0" text="\$0.75" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/pringles.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="20" />
+                  <Label fx:id="price006" minHeight="15.0" prefHeight="15.0" text="\$1.25" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/pb_cracker.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="21" />
+                  <Label fx:id="price007" minHeight="15.0" prefHeight="15.0" text="\$0.50" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" maxHeight="117.0" maxWidth="126.0" minHeight="100.0" minWidth="100.0" prefHeight="117.0" prefWidth="126.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assets/cheese_cracker.png" />
+                           </image></ImageView>
+                     </children>
+                  </StackPane>
+                  <Label minHeight="15.0" prefHeight="15.0" text="22" />
+                  <Label fx:id="price008" minHeight="15.0" prefHeight="15.0" text="\$0.50" />
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

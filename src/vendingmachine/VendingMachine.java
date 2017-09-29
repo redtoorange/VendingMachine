@@ -20,7 +20,7 @@ public class VendingMachine {
     private static final String PASSCODE = "1234";
 
     enum SessionState{
-        IDLE, CUSTOMER, OPERATOR
+        IDLE, CUSTOMER, OPERATOR, RESTOCKING, BANKING
     }
     private SessionState currentState = IDLE;
 
@@ -91,16 +91,30 @@ public class VendingMachine {
     public boolean productCode( String code ){
         boolean success = true;
 
-        try {
-            ProductSlot slot = productController.getSlot( code );
-            addProductToOrder( slot );
-        }
-        catch( Exception e ){
-            success = false;
-        }
+        switch( currentState ){
+            case IDLE:
+            case CUSTOMER:
+                try {
+                    ProductSlot slot = productController.getSlot( code );
+                    addProductToOrder( slot );
+                }
+                catch( Exception e ){
+                    success = false;
+                }
 
-        if( success ){
-            currentState = CUSTOMER;
+                if( success ){
+                    inputController.displayText( "Product ordered" );
+                    currentState = CUSTOMER;
+                }
+                break;
+            case OPERATOR:
+                try {
+                    ProductSlot slot = productController.getSlot( code );
+                    inputController.displayText( "Stock Level: " + slot.getProductStock() );
+                }
+                catch( Exception e ){
+                    success = false;
+                }
         }
 
         return success;

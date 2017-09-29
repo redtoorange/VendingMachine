@@ -19,6 +19,13 @@ public class Bank {
         dimes = new Stack< Coin >();
         nickels = new Stack< Coin >();
         pennies = new Stack< Coin >();
+
+        for( int i = 0; i < 10; i++){
+            quarters.push( Coin.Quarter );
+            dimes.push( Coin.Dime );
+            nickels.push( Coin.Nickel );
+            pennies.push( Coin.Penny );
+        }
     }
 
     public void addCoin( Coin coin ) {
