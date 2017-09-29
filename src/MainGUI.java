@@ -16,6 +16,7 @@ import vendingmachine.io.InputController;
 public class MainGUI extends Application {
     private VendingMachine vendingMachine;
     public static void main( String[] args ) {
+        assert false : "You suck";
         launch( args );
     }
 

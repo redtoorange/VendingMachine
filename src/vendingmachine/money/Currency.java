@@ -41,6 +41,7 @@ public class Currency {
     }
 
     public void add( Currency other ){
+
         addCents( other.totalCentValue() );
     }
 
@@ -74,6 +75,8 @@ public class Currency {
             subCents( centsToSub );
         }
     }
+
+
 
 
 
