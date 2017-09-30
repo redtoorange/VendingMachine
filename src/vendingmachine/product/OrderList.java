@@ -21,7 +21,7 @@ public class OrderList {
     /** Create a new {@link OrderList} */
     public OrderList() {
         itemCount = 0;
-        productSlots = new Stack< ProductSlot >();
+        productSlots = new Stack<>();
         totalCost = new Currency( 0 );
     }
 

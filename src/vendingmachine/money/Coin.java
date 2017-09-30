@@ -30,13 +30,15 @@ public enum Coin {
         return centValue;
     }
 
-    /**
-     * Get the centValue of a coin as a {@link Currency} Representation.  This is much more heavy weight and should not be used
-     * unless you intend to create a designated amount of currency.  The {@link Coin} object is lost in the process.
-     *
-     * @return {@link Currency} representation
-     */
-    public Currency getCurrencyValue() {
-        return new Currency( this.centValue );
-    }
+// --Commented out by Inspection START (9/30/2017 12:09 AM):
+//    /**
+//     * Get the centValue of a coin as a {@link Currency} Representation.  This is much more heavy weight and should not be used
+//     * unless you intend to create a designated amount of currency.  The {@link Coin} object is lost in the process.
+//     *
+//     * @return {@link Currency} representation
+//     */
+//    public Currency getCurrencyValue() {
+//        return new Currency( this.centValue );
+//    }
+// --Commented out by Inspection STOP (9/30/2017 12:09 AM)
 }

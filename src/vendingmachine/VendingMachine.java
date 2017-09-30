@@ -20,12 +20,15 @@ import static vendingmachine.VendingMachine.MachineState.*;
 public class VendingMachine {
     private static final String BANK_OP = "0";
     private static final String STOCK_OP = "1";
+    private static final String BANK_EMPTY_CODE = "0";
+
     private static final String PASSCODE = "1234";
     private MachineState currentState = IDLE;
     private OrderList orderList;
     private ProductController productController;
     private InputController inputController;
     private CurrencyController currencyController;
+
     /**
      * Create a new standard {@link VendingMachine}.  This creates the {@link VendingMachine} that goes with our current
      * {@link vendingmachine.gui.ViewController}, but it could be easily modified.
@@ -249,7 +252,7 @@ public class VendingMachine {
 
     private void bankCode( String code ) {
         switch ( code ) {
-            case "0":
+            case BANK_EMPTY_CODE:
                 currencyController.getBank().clearBank();
                 inputController.display( Messages.BANKING_MSG );
         }
@@ -260,16 +263,11 @@ public class VendingMachine {
 
     }
 
-    private boolean operatorLogin( String code ) {
-        boolean success = false;
-
-        if ( code.equals( PASSCODE ) ) {
+    private void operatorLogin( String code ) {
+        if ( code.equals( PASSCODE ) )
             setCurrentState( OPERATOR );
-            success = true;
-        } else
+        else
             inputController.clear();
-
-        return success;
     }
 
     private void addProductToOrder( ProductSlot slot ) {

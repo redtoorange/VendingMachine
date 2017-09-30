@@ -116,8 +116,12 @@ public class Currency {
 
         if ( c == 0 )
             sb.append( "00" );
-        else if ( c < 10 )
-            sb.append( "0" + c );
+
+        else if ( c < 10 ){
+            sb.append( "0" );
+            sb.append( c );
+        }
+
         else
             sb.append( c );
 

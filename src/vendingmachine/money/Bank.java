@@ -18,10 +18,10 @@ public class Bank {
     private Stack< Coin > pennies;
 
     public Bank() {
-        quarters = new Stack< Coin >();
-        dimes = new Stack< Coin >();
-        nickels = new Stack< Coin >();
-        pennies = new Stack< Coin >();
+        quarters = new Stack<>();
+        dimes = new Stack<>();
+        nickels = new Stack<>();
+        pennies = new Stack<>();
 
         //TODO: Remove this, debug code only.
         for ( int i = 0; i < 10; i++ ) {

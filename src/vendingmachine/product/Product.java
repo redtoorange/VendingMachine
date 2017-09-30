@@ -9,7 +9,7 @@ package vendingmachine.product;
  * @version 9/29/2017
  */
 public class Product {
-    private String name;
+    private final String name;
 
     /**
      * Create a new {@link Product} with the given name.

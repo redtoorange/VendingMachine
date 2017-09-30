@@ -14,7 +14,6 @@ import vendingmachine.io.InputController;
  * @version 9/24/2017
  */
 public class MainGUI extends Application {
-    private VendingMachine vendingMachine;
     public static void main( String[] args ) {
         assert false : "You suck";
         launch( args );
@@ -25,7 +24,7 @@ public class MainGUI extends Application {
         FXMLLoader loader = new FXMLLoader( getClass().getResource( "vendingmachine/gui/View.fxml" ) );
         Parent root = loader.load();
 
-        vendingMachine = new VendingMachine();
+        VendingMachine vendingMachine = new VendingMachine();
         InputController inputController = vendingMachine.getInputController();
 
         ViewController viewController = loader.getController();
