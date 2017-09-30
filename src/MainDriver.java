@@ -131,7 +131,7 @@ public class MainDriver {
             ProductSlot slot = pCon.getSlot( "00" );
             slot.setCurrentProduct( new Product( "Test vendingmachine.product.Product" ) );
             slot.setCost( new Currency( 105 ) );
-            slot.addProductStock( 1 );
+//            slot.addProductStock( 1 );
 
             Product p = slot.dispenseProduct();
             if ( p != null ) {

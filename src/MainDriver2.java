@@ -5,10 +5,10 @@ import vendingmachine.io.KeyPad;
 import vendingmachine.money.Coin;
 
 /**
- * ${FILE_NAME}.java - Description
+ * MainDriver2.java - Description
  *
- * @author
- * @version 15/Sep/2017
+ * @author  Andrew McGuiness
+ * @version 9/15/2017
  */
 public class MainDriver2 {
     public static void main( String[] args ) {

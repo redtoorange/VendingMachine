@@ -9,30 +9,27 @@ import vendingmachine.product.OrderList;
 import vendingmachine.product.ProductController;
 import vendingmachine.product.ProductSlot;
 
-import static vendingmachine.VendingMachine.SessionState.*;
+import static vendingmachine.VendingMachine.MachineState.*;
 
 /**
- * ${FILE_NAME}.java - Description
+ * VendingMachine.java - Description
  *
- * @author
- * @version 15/Sep/2017
+ * @author Andrew McGuiness
+ * @version 9/29/2017
  */
 public class VendingMachine {
     private static final String BANK_OP = "0";
     private static final String STOCK_OP = "1";
-
     private static final String PASSCODE = "1234";
-
-    enum SessionState{
-        IDLE, CUSTOMER, OPERATOR, RESTOCKING, BANKING
-    }
-    private SessionState currentState = IDLE;
-
+    private MachineState currentState = IDLE;
     private OrderList orderList;
     private ProductController productController;
     private InputController inputController;
     private CurrencyController currencyController;
-
+    /**
+     * Create a new standard {@link VendingMachine}.  This creates the {@link VendingMachine} that goes with our current
+     * {@link vendingmachine.gui.ViewController}, but it could be easily modified.
+     */
     public VendingMachine() {
         productController = new ProductController( 3, 3 );
 
@@ -41,55 +38,80 @@ public class VendingMachine {
         orderList = new OrderList();
     }
 
+    /**
+     * Get the {@link VendingMachine}'s {@link ProductController}
+     *
+     * @return current {@link ProductController}
+     */
     public ProductController getProductController() {
         return productController;
     }
 
+    /**
+     * Get the {@link VendingMachine}'s {@link InputController}
+     *
+     * @return current {@link InputController}
+     */
     public InputController getInputController() {
         return inputController;
     }
 
+    /**
+     * Get the {@link VendingMachine}'s {@link CurrencyController}
+     *
+     * @return current {@link CurrencyController}
+     */
     public CurrencyController getCurrencyController() {
         return currencyController;
     }
 
-    public void coinInsertMessage( Coin c ){
-        switch( currentState ){
-            case IDLE: case CUSTOMER:
-                customerSessionCoin(c);
+    /**
+     * Handle a {@link Coin} being inserted based on the {@link VendingMachine}'s current state.
+     *
+     * @param insertedCoin {@link Coin} that was inserted.
+     */
+    public void coinInsertMessage( Coin insertedCoin ) {
+        switch ( currentState ) {
+            case IDLE:
+            case CUSTOMER:
+                customerSessionCoin( insertedCoin );
                 break;
 
             case BANKING:
-                bankingAddCoin(c);
+                bankingAddCoin( insertedCoin );
                 break;
 
-            case OPERATOR: case RESTOCKING:
-                rejectCoin( c );
+            case OPERATOR:
+            case RESTOCKING:
+                rejectCoin( insertedCoin );
                 break;
         }
     }
 
-    private void customerSessionCoin(Coin c){
-        if( currentState == IDLE )
+    private void customerSessionCoin( Coin insertedCoin ) {
+        if ( currentState == IDLE )
             setCurrentState( CUSTOMER );
 
-        currencyController.addCoinToBalance( c );
+        currencyController.addCoinToBalance( insertedCoin );
         inputController.display( currencyController.getCurrentBalance().toString() );
     }
 
-    private void bankingAddCoin( Coin c){
-        currencyController.addCoinToBank( c );
+    private void bankingAddCoin( Coin insertedCoin ) {
+        currencyController.addCoinToBank( insertedCoin );
         setCurrentState( BANKING );
     }
 
-
-    private void rejectCoin( Coin c){
-        currencyController.addCoinToBalance( c );
+    private void rejectCoin( Coin insertedCoin ) {
+        currencyController.addCoinToBalance( insertedCoin );
         currencyController.refundCurrentBalance();
     }
 
-    public void finishMessage(){
-        switch ( currentState ){
+    /**
+     * Handle the "Finish" {@link javafx.scene.control.Button} being pressed based on the {@link VendingMachine}'s
+     * current state.
+     */
+    public void finishMessage() {
+        switch ( currentState ) {
             case CUSTOMER:
                 customerFinishSession();
                 break;
@@ -98,36 +120,37 @@ public class VendingMachine {
                 operatorFinishSession();
                 break;
 
-            case RESTOCKING: case BANKING:
+            case RESTOCKING:
+            case BANKING:
                 setCurrentState( OPERATOR );
                 break;
         }
     }
 
-    private void customerFinishSession(){
+    private void customerFinishSession() {
         Currency bal = currencyController.getCurrentBalance();
         Currency bill = orderList.getTotalCost();
 
-        if( bill.lessThanOrEqual( bal ) ){
+        if ( bill.lessThanOrEqual( bal ) ) {
             currencyController.completeTransaction( orderList.completeOrder() );
-            inputController.display( "Product order finished." );
+            inputController.display( Messages.ORDER_FINISHED );
             setCurrentState( CUSTOMER );
-        }
-        else{
+        } else {
             inputController.display( "Insufficient Change:" +
                     "\n\tHave: " + bal +
-                    "\n\tNeed: " + bill);
+                    "\n\tNeed: " + bill );
         }
     }
 
-    private void operatorFinishSession(){
+    private void operatorFinishSession() {
         setCurrentState( IDLE );
     }
 
-
-
-    public void cancelMessage(){
-        switch( currentState ){
+    /**
+     * Handle the "Cancel" {@link javafx.scene.control.Button} being pressed based on the {@link VendingMachine}'s current state.
+     */
+    public void cancelMessage() {
+        switch ( currentState ) {
             case IDLE:
                 setCurrentState( IDLE );
                 break;
@@ -140,29 +163,35 @@ public class VendingMachine {
                 cancelOperatorSession();
                 break;
 
-            case RESTOCKING: case BANKING:
+            case RESTOCKING:
+            case BANKING:
                 setCurrentState( OPERATOR );
                 break;
         }
     }
 
-    private void cancelCustomerSession(){
+    private void cancelCustomerSession() {
         currencyController.refundCurrentBalance();
 
-        if( orderList.getItemCount() > 0)
+        if ( orderList.getItemCount() > 0 )
             orderList.cancelOrder();
 
         setCurrentState( IDLE );
     }
 
-    private void cancelOperatorSession(){
+    private void cancelOperatorSession() {
         setCurrentState( IDLE );
     }
 
-    public void inputMessage( String message ){
-        switch( currentState ){
+    /**
+     * Handle the all other messages based on the {@link VendingMachine}'s current state.
+     *
+     * @param message {@link String} message to process.
+     */
+    public void inputMessage( String message ) {
+        switch ( currentState ) {
             case IDLE:
-                if( message.length() == 4)
+                if ( message.length() == 4 )
                     operatorLogin( message );
                 else
                     attemptToAddProduct( message );
@@ -181,7 +210,7 @@ public class VendingMachine {
                 break;
 
             case RESTOCKING:
-                stockCode(message);
+                stockCode( message );
                 break;
         }
     }
@@ -191,24 +220,22 @@ public class VendingMachine {
         try {
             ProductSlot slot = productController.getSlot( message );
             addProductToOrder( slot );
-        }
-        catch( Exception e ){
+        } catch ( Exception e ) {
             success = false;
         }
 
-        if( success ){
-            if( currentState != CUSTOMER)
+        if ( success ) {
+            if ( currentState != CUSTOMER )
                 setCurrentState( CUSTOMER );
 
-            inputController.display( "Product added to order." );
-        }
-        else{
-            inputController.display( "Invalid Input" );
+            inputController.display( Messages.PRODUCT_ADDED );
+        } else {
+            inputController.display( Messages.BAD_INPUT );
         }
     }
 
-    private void opCode( String code ){
-        switch ( code ){
+    private void opCode( String code ) {
+        switch ( code ) {
             case BANK_OP:
                 setCurrentState( BANKING );
                 break;
@@ -220,8 +247,8 @@ public class VendingMachine {
         }
     }
 
-    private void bankCode( String code ){
-        switch ( code ){
+    private void bankCode( String code ) {
+        switch ( code ) {
             case "0":
                 currencyController.getBank().clearBank();
                 inputController.display( Messages.BANKING_MSG );
@@ -229,40 +256,38 @@ public class VendingMachine {
         inputController.display( Messages.BANKING_MSG );
     }
 
-    private void stockCode( String code ){
+    private void stockCode( String code ) {
 
     }
 
-    private boolean operatorLogin( String code ){
+    private boolean operatorLogin( String code ) {
         boolean success = false;
 
-        if( code.equals( PASSCODE )){
+        if ( code.equals( PASSCODE ) ) {
             setCurrentState( OPERATOR );
             success = true;
-        }
-        else
+        } else
             inputController.clear();
 
         return success;
     }
 
-    private void addProductToOrder( ProductSlot slot ){
-        if( slot.getProductStock() <= 0){
-            inputController.display( "Product Out of Stock" );
-        }
-        else{
+    private void addProductToOrder( ProductSlot slot ) {
+        if ( slot.getProductStock() <= 0 ) {
+            inputController.display( Messages.OUT_OF_STOCK );
+        } else {
             orderList.addProduct( slot );
         }
     }
 
-    private void setCurrentState( SessionState state ){
+    private void setCurrentState( MachineState state ) {
         currentState = state;
 
         handleOperatorStates();
         handleCustomerStates();
     }
 
-    private void handleCustomerStates(){
+    private void handleCustomerStates() {
         switch ( currentState ) {
             case IDLE:
                 inputController.clear();
@@ -275,7 +300,7 @@ public class VendingMachine {
     }
 
     private void handleOperatorStates() {
-        switch ( currentState ){
+        switch ( currentState ) {
             case OPERATOR:
                 inputController.display( Messages.OPERATOR_MSG );
                 break;
@@ -283,15 +308,18 @@ public class VendingMachine {
             case BANKING:
                 inputController.display(
                         currencyController.getBank() +
-                        Messages.BANKING_MSG
+                                Messages.BANKING_MSG
                 );
                 break;
 
             case RESTOCKING:
-                inputController.display(Messages.RESTOCKING_MSG);
+                inputController.display( Messages.RESTOCKING_MSG );
                 break;
         }
     }
 
-
+    /** Possible Machine States */
+    protected enum MachineState {
+        IDLE, CUSTOMER, OPERATOR, RESTOCKING, BANKING
+    }
 }

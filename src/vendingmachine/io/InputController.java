@@ -19,6 +19,10 @@ public class InputController {
     private CoinSlot coinSlot;
     private OutputDisplay outputDisplay;
 
+    /**
+     * Create a new {@link InputController} for a {@link VendingMachine}
+     * @param vendingMachine    {@link VendingMachine} to pipe messages to.
+     */
     public InputController( VendingMachine vendingMachine ) {
         this.vendingMachine = vendingMachine;
 

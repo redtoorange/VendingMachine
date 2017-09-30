@@ -92,10 +92,11 @@ public class Currency {
     }
 
     /**
-     * Compare the value of this {@link Currency} to another {@link Currency} instance, if this one is <= the other, return true.
+     * Compare the value of this {@link Currency} to another {@link Currency} instance, if this one is less than or
+     * equal to the other, return true.
      *
      * @param other {@link Currency} instance to compare to.
-     * @return True of this currency is <= other
+     * @return True of this currency is less than or equal to the other
      */
     public boolean lessThanOrEqual( Currency other ) {
         return totalCentValue() <= other.totalCentValue();
