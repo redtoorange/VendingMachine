@@ -64,7 +64,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@assets/penny.png" />
+                        <Image url="@assets/coins/penny.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -72,7 +72,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@assets/nickel.png" />
+                        <Image url="@assets/coins/nickel.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -80,7 +80,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@assets/dime.png" />
+                        <Image url="@assets/coins/dime.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -88,7 +88,7 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@assets/quarter.png" />
+                        <Image url="@assets/coins/quarter.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -116,7 +116,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/snickers.png" />
+                              <Image url="@assets/food/snickers.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -130,7 +130,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/milky.png" />
+                              <Image url="@assets/food/milky.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -144,7 +144,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/hersheys.png" />
+                              <Image url="@assets/food/hersheys.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -156,7 +156,7 @@
                <children>
                   <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@assets/doritos.png" />
+                        <Image url="@assets/food/doritos.png" />
                      </image>
                   </ImageView>
                   <Label minHeight="15.0" prefHeight="15.0" text="10" />
@@ -169,7 +169,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/cr_doritos.png" />
+                              <Image url="@assets/food/cr_doritos.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -183,7 +183,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/fritos-original-corn-chips-350x400.png" />
+                              <Image url="@assets/food/fritos.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -197,7 +197,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/pringles.png" />
+                              <Image url="@assets/food/pringles.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -211,7 +211,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/pb_cracker.png" />
+                              <Image url="@assets/food/pb_cracker.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
@@ -225,7 +225,7 @@
                      <children>
                         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@assets/cheese_cracker.png" />
+                              <Image url="@assets/food/cheese_cracker.png" />
                            </image></ImageView>
                      </children>
                   </StackPane>
