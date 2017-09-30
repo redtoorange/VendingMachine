@@ -19,21 +19,6 @@ public class ProductSlot {
     private Product currentProduct;
     private int productStock;
 
-// --Commented out by Inspection START (9/30/2017 12:09 AM):
-//    /**
-//     * Create a new {@link ProductSlot} with the supplied price, {@link Product} and stock level.
-//     *
-//     * @param cost           {@link Currency} cost of the {@link Product} in this {@link ProductSlot}
-//     * @param currentProduct {@link Product} that this {@link ProductSlot} will dispense
-//     * @param productStock   stock level of this {@link ProductSlot}.
-//     */
-//    public ProductSlot( Currency cost, Product currentProduct, int productStock ) {
-//        this.cost = cost;
-//        this.currentProduct = currentProduct;
-//        this.productStock = productStock;
-//    }
-// --Commented out by Inspection STOP (9/30/2017 12:09 AM)
-
     /**
      * Create a new empty {@link ProductSlot}.
      */
@@ -84,8 +69,11 @@ public class ProductSlot {
      *
      * @param productStock number to set the stock level to.
      */
-    protected void setProductStock( int productStock ) {
-        this.productStock = productStock;
+    public void setProductStock( int productStock ) throws ProductLevelException {
+        if ( productStock < 0 )
+            throw new ProductLevelException( "Cannot set stock to a negative number." );
+        else
+            this.productStock = productStock;
     }
 
     /**

@@ -10,7 +10,8 @@ package vendingmachine.product;
 public class ProductLevelException extends Exception {
     /**
      * Create a new {@link ProductLevelException} with a message of what happened.
-     * @param message   {@link String} explaining what fault occurred.
+     *
+     * @param message {@link String} explaining what fault occurred.
      */
     public ProductLevelException( String message ) {
         super( message );

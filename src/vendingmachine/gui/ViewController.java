@@ -34,9 +34,9 @@ public class ViewController {
      * {@link vendingmachine.VendingMachine}.  This effectively Glues this {@link ViewController} to a particular
      * Instance of a {@link vendingmachine.VendingMachine}.
      *
-     * @param keyPad            {@link KeyPad} instance to send button messages to.
-     * @param coinSlot          {@link CoinSlot} to send insertCoin messages to.
-     * @param outputDisplay     {@link OutputDisplay} that will be sending output to the GUI.
+     * @param keyPad        {@link KeyPad} instance to send button messages to.
+     * @param coinSlot      {@link CoinSlot} to send insertCoin messages to.
+     * @param outputDisplay {@link OutputDisplay} that will be sending output to the GUI.
      */
     public void init( KeyPad keyPad, CoinSlot coinSlot, OutputDisplay outputDisplay ) {
         this.keyPad = keyPad;

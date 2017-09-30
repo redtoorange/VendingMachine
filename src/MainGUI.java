@@ -8,14 +8,14 @@ import vendingmachine.gui.ViewController;
 import vendingmachine.io.InputController;
 
 /**
- * MainGUI.java - Description
+ * MainGUI.java - Main Driver class for the GUI VendingMachineApplication.  The ViewController binds to the IO controls
+ * of the VendingMachine.  Output from the VendingMachine is presented with System.out.println();
  *
  * @author Andrew McGuiness
  * @version 9/24/2017
  */
 public class MainGUI extends Application {
     public static void main( String[] args ) {
-        assert false : "You suck";
         launch( args );
     }
 
@@ -24,13 +24,15 @@ public class MainGUI extends Application {
         FXMLLoader loader = new FXMLLoader( getClass().getResource( "vendingmachine/gui/View.fxml" ) );
         Parent root = loader.load();
 
+        //Create VM
         VendingMachine vendingMachine = new VendingMachine();
         InputController inputController = vendingMachine.getInputController();
 
+        //Bind Controller to VM
         ViewController viewController = loader.getController();
         viewController.init( inputController.getKeyPad(), inputController.getCoinSlot(), inputController.getOutputDisplay() );
 
-
+        //Display
         Scene scene = new Scene( root );
         primaryStage.setScene( scene );
         primaryStage.show();

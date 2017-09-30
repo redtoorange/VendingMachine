@@ -4,7 +4,7 @@ package vendingmachine.money;
  * Coin.java - A Simple enum representation of a coin.  Separating the implementation of {@link Coin}s from {@link Currency} allows for
  * the implementation of simplified Collections to handle Banking.  All {@link Coin}s have an centValue that represents it's
  * coin value as an int.
- *
+ * <p>
  * The centValue of the {@link Coin} should be preferred when using it as a piece of a total, as it will allow the object to
  * remain as a piece of a {@link Currency} Total.
  *
@@ -29,16 +29,4 @@ public enum Coin {
     public int getCentValue() {
         return centValue;
     }
-
-// --Commented out by Inspection START (9/30/2017 12:09 AM):
-//    /**
-//     * Get the centValue of a coin as a {@link Currency} Representation.  This is much more heavy weight and should not be used
-//     * unless you intend to create a designated amount of currency.  The {@link Coin} object is lost in the process.
-//     *
-//     * @return {@link Currency} representation
-//     */
-//    public Currency getCurrencyValue() {
-//        return new Currency( this.centValue );
-//    }
-// --Commented out by Inspection STOP (9/30/2017 12:09 AM)
 }
