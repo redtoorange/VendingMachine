@@ -26,25 +26,25 @@ public class CoinSlotTest {
     }
 
     /**
-     * Method: insertCoint(Coin c)
+     * Method: insertCoin(Coin c)
      */
     @Test
     public void testInsertCoint() throws Exception {
         VendingMachine vm = new VendingMachine();
         CoinSlot cs = vm.getInputController().getCoinSlot();
-        cs.insertCoint( Coin.Penny );
+        cs.insertCoin( Coin.Penny );
         Currency bal = vm.getCurrencyController().getCurrentBalance();
         Assert.assertTrue( "Penny Failed to be added to Balance.", bal.totalCentValue() == 1 );
 
-        cs.insertCoint( Coin.Nickel );
+        cs.insertCoin( Coin.Nickel );
         bal = vm.getCurrencyController().getCurrentBalance();
         Assert.assertTrue( "Nickel Failed to be added to Balance.", bal.totalCentValue() == 6 );
 
-        cs.insertCoint( Coin.Dime );
+        cs.insertCoin( Coin.Dime );
         bal = vm.getCurrencyController().getCurrentBalance();
         Assert.assertTrue( "Dime Failed to be added to Balance.", bal.totalCentValue() == 16 );
 
-        cs.insertCoint( Coin.Quarter );
+        cs.insertCoin( Coin.Quarter );
         bal = vm.getCurrencyController().getCurrentBalance();
         Assert.assertTrue( "Quarter Failed to be added to Balance.", bal.totalCentValue() == 41 );
     }

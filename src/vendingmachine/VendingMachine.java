@@ -74,7 +74,7 @@ public class VendingMachine {
             setCurrentState( CUSTOMER );
 
         currencyController.addCoinToBalance( c );
-        inputController.displayText( currencyController.getCurrentBalance().toString() );
+        inputController.display( currencyController.getCurrentBalance().toString() );
     }
 
     private void bankingAddCoin( Coin c){
@@ -110,11 +110,11 @@ public class VendingMachine {
 
         if( bill.lessThanOrEqual( bal ) ){
             currencyController.completeTransaction( orderList.completeOrder() );
-            inputController.displayText( "Product order finished." );
+            inputController.display( "Product order finished." );
             setCurrentState( CUSTOMER );
         }
         else{
-            inputController.displayText( "Insufficient Change:" +
+            inputController.display( "Insufficient Change:" +
                     "\n\tHave: " + bal +
                     "\n\tNeed: " + bill);
         }
@@ -200,10 +200,10 @@ public class VendingMachine {
             if( currentState != CUSTOMER)
                 setCurrentState( CUSTOMER );
 
-            inputController.displayText( "Product added to order." );
+            inputController.display( "Product added to order." );
         }
         else{
-            inputController.displayText( "Invalid Input" );
+            inputController.display( "Invalid Input" );
         }
     }
 
@@ -216,7 +216,7 @@ public class VendingMachine {
                 setCurrentState( RESTOCKING );
                 break;
             default:
-                inputController.displayText( Messages.OPERATOR_MSG );
+                inputController.display( Messages.OPERATOR_MSG );
         }
     }
 
@@ -224,9 +224,9 @@ public class VendingMachine {
         switch ( code ){
             case "0":
                 currencyController.getBank().clearBank();
-                inputController.displayText( Messages.BANKING_MSG );
+                inputController.display( Messages.BANKING_MSG );
         }
-        inputController.displayText( Messages.BANKING_MSG );
+        inputController.display( Messages.BANKING_MSG );
     }
 
     private void stockCode( String code ){
@@ -241,14 +241,14 @@ public class VendingMachine {
             success = true;
         }
         else
-            inputController.clearDisplay();
+            inputController.clear();
 
         return success;
     }
 
     private void addProductToOrder( ProductSlot slot ){
         if( slot.getProductStock() <= 0){
-            inputController.displayText( "Product Out of Stock" );
+            inputController.display( "Product Out of Stock" );
         }
         else{
             orderList.addProduct( slot );
@@ -265,11 +265,11 @@ public class VendingMachine {
     private void handleCustomerStates(){
         switch ( currentState ) {
             case IDLE:
-                inputController.clearDisplay();
+                inputController.clear();
                 break;
 
             case CUSTOMER:
-                inputController.clearDisplay();
+                inputController.clear();
                 break;
         }
     }
@@ -277,18 +277,18 @@ public class VendingMachine {
     private void handleOperatorStates() {
         switch ( currentState ){
             case OPERATOR:
-                inputController.displayText( Messages.OPERATOR_MSG );
+                inputController.display( Messages.OPERATOR_MSG );
                 break;
 
             case BANKING:
-                inputController.displayText(
+                inputController.display(
                         currencyController.getBank() +
                         Messages.BANKING_MSG
                 );
                 break;
 
             case RESTOCKING:
-                inputController.displayText(Messages.RESTOCKING_MSG);
+                inputController.display(Messages.RESTOCKING_MSG);
                 break;
         }
     }

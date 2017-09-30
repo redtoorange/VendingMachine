@@ -5,10 +5,10 @@ import vendingmachine.money.Currency;
 import java.util.Stack;
 
 /**
- * ${FILE_NAME}.java - Description
+ * OrderList.java - Description
  *
- * @author
- * @version 25/Sep/2017
+ * @author  Andrew McGuiness
+ * @version 9/29/2017
  */
 public class OrderList {
     private int itemCount = 0;

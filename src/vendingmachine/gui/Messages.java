@@ -1,7 +1,9 @@
 package vendingmachine.gui;
 
 /**
- * Messages.java - Description
+ * Messages.java - Central location that will contain all the {@link String}s used by the
+ * {@link vendingmachine.VendingMachine}.  This could be swapped out for a different {@link Messages} class depending
+ * on the language the {@link vendingmachine.VendingMachine} should use.
  *
  * @author Andrew McGuiness
  * @version 9/29/2017

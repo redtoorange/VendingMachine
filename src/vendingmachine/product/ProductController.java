@@ -4,10 +4,10 @@ import vendingmachine.io.InputException;
 import vendingmachine.money.Currency;
 
 /**
- * vendingmachine.product.ProductController.java - Description
+ * ProductController.java - Description
  *
  * @author Andrew McGuiness
- * @version 9/12/2017
+ * @version 9/29/2017
  */
 public class ProductController {
     private ProductSlot[][] productSlots;

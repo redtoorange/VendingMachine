@@ -3,10 +3,10 @@ package vendingmachine.product;
 import vendingmachine.money.Currency;
 
 /**
- * vendingmachine.product.ProductSlot.java - Description
+ * ProductSlot.java - Description
  *
  * @author Andrew McGuiness
- * @version 9/12/2017
+ * @version 9/29/2017
  */
 public class ProductSlot {
     private Currency cost;

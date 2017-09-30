@@ -94,7 +94,7 @@
                </graphic></Button>
          </children>
       </HBox>
-      <Button layoutX="397.0" layoutY="356.0" mnemonicParsing="false" onAction="#doneClicked" prefHeight="50.0" prefWidth="150.0" text="Complete">
+      <Button layoutX="397.0" layoutY="356.0" mnemonicParsing="false" onAction="#finishClicked" prefHeight="50.0" prefWidth="150.0" text="Complete">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

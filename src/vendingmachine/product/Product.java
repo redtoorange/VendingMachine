@@ -1,10 +1,10 @@
 package vendingmachine.product;
 
 /**
- * vendingmachine.product.Product.java - Description
+ * Product.java - Description
  *
  * @author Andrew McGuiness
- * @version 9/12/2017
+ * @version 9/29/2017
  */
 public class Product {
     private String name;

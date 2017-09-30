@@ -18,9 +18,9 @@ public class MainDriver2 {
         KeyPad kp = ic.getKeyPad();
 
         System.out.println( vm.getCurrencyController().getCurrentBalance() );
-        cs.insertCoint( Coin.Quarter );
-        cs.insertCoint( Coin.Quarter );
-        cs.insertCoint( Coin.Quarter );
+        cs.insertCoin( Coin.Quarter );
+        cs.insertCoin( Coin.Quarter );
+        cs.insertCoin( Coin.Quarter );
         System.out.println( vm.getCurrencyController().getCurrentBalance() );
 
         kp.pressedButton( "00" );

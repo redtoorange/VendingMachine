@@ -1,10 +1,10 @@
 package vendingmachine.product;
 
 /**
- * vendingmachine.product.ProductLevelException.java - Description
+ * ProductLevelException.java - Description
  *
  * @author Andrew McGuiness
- * @version 9/12/2017
+ * @version 9/29/2017
  */
 public class ProductLevelException extends Exception {
     public ProductLevelException( String message ) {
