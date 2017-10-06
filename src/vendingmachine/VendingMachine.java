@@ -304,11 +304,10 @@ public class VendingMachine {
             currentSlot = productController.getSlot( message );
             boolean added = addProductToOrder( currentSlot );
 
-            if ( added && currentState != CUSTOMER ) {
+            if ( added && currentState != CUSTOMER )
                 setCurrentState( CUSTOMER );
-                inputController.display( Messages.PRODUCT_ADDED );
-            }
 
+            inputController.display( Messages.PRODUCT_ADDED );
         } catch ( Exception e ) {
             inputController.display( Messages.BAD_INPUT );
         }
